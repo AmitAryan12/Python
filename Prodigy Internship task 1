@@ -1,0 +1,60 @@
+Create a Python program that can encrypt and decrypt text using the Caesar Cipher algorithm. Allow users to input a message and a shift value to perform encryption and decryption.
+
+def encryption(plain_text,shift_value):
+    cipher_value = ""
+    for char in plain_text:
+        if char.isalpha():
+            ascii_value = 65 if char.isupper() else 97
+            character_code = (ord(char)-ascii_value)
+            key = (character_code + shift_value)%26
+            encrypt_char = chr(key+ascii_value)
+            cipher_value += encrypt_char
+
+        else:
+            cipher_value += char
+    return cipher_value
+
+def decryption(cipher_text,shift_value):
+    plain_text =""
+    for char in cipher_text:
+        if char.isalpha():
+            ascii_value = 65 if char.isupper() else 97
+            character_code = (ord(char)-ascii_value)
+            key = (character_code - shift_value)%26
+            decrypt_char = chr(key+ascii_value)
+            plain_text+= decrypt_char
+        else:
+            plain_text+=char
+    return plain_text
+
+def input_method():
+    print('\n -----> Caesar Ciphar Incryption, Decryption Program. <-----  \n')
+    print(' Press 1 For Incryption.')
+    print(' press 2 For Decryption.')
+    print(' Press 3 For Quit.')
+    print(' ----------------------------------------------------------- ')
+    choice = int (input(' Enter Any Choice You Want : '))
+    print(' ----------------------------------------------------------- ')
+    return choice
+# Main Method 
+cipher_text = ""
+while 1<2:
+    choice = input_method()
+    if choice == 1 :
+        plain_text = input(' Enter Plain text         : ')
+        print('\n Please enter shift value between 1 to 26 only.\n')
+        shift_value = int(input(' Enter shift value        :'))
+        cipher_text = encryption( plain_text,shift_value)
+        print(' Cipher Text              :', cipher_text)
+    elif choice == 2 :
+        if cipher_text=="":
+            print(' Empty Cipher Text! ')
+        else:
+            print(' Cipher Text               :',cipher_text)
+            print(' Plain Text                :',decryption(cipher_text,shift_value))
+    elif choice == 3 :
+        quit()
+    else:
+        print(' Sorry!, Your Choice is Wrong, Please Enter Valid Choice. ')
+    print('\n>-----------------------ThankYou--------------------------->')
+        
